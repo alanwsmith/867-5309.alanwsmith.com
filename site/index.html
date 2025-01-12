@@ -105,6 +105,10 @@ main {
   z-index: -1;
 }
 
+.hidden {
+  display: none;
+}
+
 /*
 .bg-div-1 {
   background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
@@ -194,9 +198,6 @@ main {
   justify-items: center;
 }
 
-.hidden {
-  display: none;
-}
 
 button {
   font-size: 3rem;
@@ -290,45 +291,82 @@ button {
       <div class="bg-div-1"></div>
       <div class="bg-div-3"></div>
       <button class="startButton">Call: 867-5309</button>
+      <div id="playerWrapper" class="hidden"></div>
     </main>
 
-    <script type="module">
-    let frame = 1
-    let theInterval
-    const bgDivs = [
-      document.querySelector(".bg-div-1"),
-      document.querySelector(".bg-div-2"),
-      document.querySelector(".bg-preload")
-    ]
+    <footer>
+      <div>
+        from <a href="https://www.alanwsmith.com">alan w smith</a>
+      </div>
+      <div>
+        <a href="https://www.alanwsmith.com">alanwsmith.com</a> - 
+        <a href="https://links.alanwsmith.com">other sites</a> - 
+        <a href="https://bsky.app/profile/alanwsmith.com">bluesky</a> - 
+        <a href="https://hachyderm.io/@TheIdOfAlan">mastodon</a>
+      </div>
+    </footer>
 
-    function init() {
-      switchImage()
-      theInterval = setInterval(() => {
-        console.log(frame)
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+
+      let frame = 1
+      let theInterval
+      const bgDivs = [
+        document.querySelector(".bg-div-1"),
+        document.querySelector(".bg-div-2"),
+        document.querySelector(".bg-preload")
+      ]
+
+      function init() {
         switchImage()
-      }, 10000) 
-    }
-
-    function switchImage() {
-      frame += 1
-      if (frame < 115) {
-        bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${frame + 1}.jpg)`
+        theInterval = setInterval(() => {
+          console.log(frame)
+          switchImage()
+        }, 10000) 
       }
-      if (frame < 116) {
-        if (frame % 2 === 0) {
-          bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${frame}.jpg)`
-          bgDivs[0].classList.add("off")
-        } else {
-          bgDivs[0].style.backgroundImage = `url(thumbs/thumbnail-${frame}.jpg)`
-          bgDivs[0].classList.remove("off")
+
+      function switchImage() {
+        frame += 1
+        if (frame < 115) {
+          bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${frame + 1}.jpg)`
         }
-      } else {
-        theInterval = null
+        if (frame < 116) {
+          if (frame % 2 === 0) {
+            bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${frame}.jpg)`
+            bgDivs[0].classList.add("off")
+          } else {
+            bgDivs[0].style.backgroundImage = `url(thumbs/thumbnail-${frame}.jpg)`
+            bgDivs[0].classList.remove("off")
+          }
+        } else {
+          theInterval = null
+        }
       }
-    }
 
-    let playButton = document.querySelector(".startButton")
-    playButton.addEventListener("click", init)
+      let playButton = document.querySelector(".startButton")
+      playButton.addEventListener("click", () => { init(); playIt(); })
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('playerWrapper', {
+          height: '390',
+          width: '640',
+          playerVars: {
+            'playsinline': 1
+          },
+        });
+      }
+
+      function playIt() {
+        playButton.classList.toggle("hidden")
+        let playerWrapper = document.querySelector("#playerWrapper")
+        playerWrapper.classList.toggle("hidden")
+        player.loadVideoById("6WTdTwcmxyo")
+      }
+
     </script>
 
   </body>
