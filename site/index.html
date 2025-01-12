@@ -29,7 +29,7 @@ a, a:hover {
 }
 
 .bg-1 {
-  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
+  background: url(thumbs/thumbnail-2.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -52,7 +52,7 @@ a, a:hover {
 }
 
 .bg-2 {
-  background: url(thumbs/thumbnail-2.jpg) no-repeat center center fixed; 
+  background: url(thumbs/thumbnail-3.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -168,7 +168,7 @@ main {
       ]
 
       function switchImage() {
-        let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 1 
+        let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 2
         let preloadFrameNumber = nextFrameNumber + 1
         bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
         if (nextFrameNumber % 2 === 1) {
@@ -200,8 +200,9 @@ main {
         playButton.classList.toggle("hidden")
         let playerWrapper = document.querySelector("#playerWrapper")
         playerWrapper.classList.toggle("hidden")
-        player.loadVideoById("6WTdTwcmxyo")
+        player.loadVideoById("6WTdTwcmxyo", 6.9)
       }
+
 
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING) {
