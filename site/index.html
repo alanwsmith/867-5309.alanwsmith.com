@@ -19,6 +19,12 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="A page for the classic number: 867-5309" />
     <style>
+*, 
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+
 * {
   margin: 0;
 }
@@ -29,7 +35,7 @@ a, a:hover {
 }
 
 .bg-1 {
-  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
+  background: url(thumbs/thumbnail-2.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -52,7 +58,7 @@ a, a:hover {
 }
 
 .bg-2 {
-  background: url(thumbs/thumbnail-2.jpg) no-repeat center center fixed; 
+  background: url(thumbs/thumbnail-3.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -89,7 +95,7 @@ body {
   font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   font-weight: normal;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   height: 100vh;
 }
 
@@ -125,22 +131,47 @@ iframe {
 }
 
 main {
-  position: relative;
   align-items: center;
   display: grid;
   justify-items: center;
+  margin-inline: auto;
+  position: relative;
+  width: min(100vw - 2rem, 58ch);
 }
+
+.playerWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  width: 100%;
+}
+
+.playerWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
     </style>
   </head>
  
   <body>
+    <header>
+      <div class="backgrounds">
+        <div class="bg-preload"></div>
+        <div class="bg-2"></div>
+        <div class="bg-1"></div>
+        <div class="bg-blur"></div>
+      </div>
+    </header>
+
     <main> 
-      <div class="bg-preload"></div>
-      <div class="bg-2"></div>
-      <div class="bg-1"></div>
-      <div class="bg-blur"></div>
       <button class="startButton">Call: 867-5309</button>
-      <div id="playerWrapper" class="hidden"></div>
+      <div class="playerWrapper hidden">
+        <div id="player" class="hidden"></div>
+      </div>
     </main>
 
     <footer class="gray">
@@ -168,7 +199,7 @@ main {
       ]
 
       function switchImage() {
-        let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 1 
+        let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 2
         let preloadFrameNumber = nextFrameNumber + 1
         bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
         if (nextFrameNumber % 2 === 1) {
@@ -184,7 +215,7 @@ main {
       playButton.addEventListener("click", playIt)
 
       function onYouTubeIframeAPIReady() {
-        player = new YT.Player('playerWrapper', {
+        player = new YT.Player('player', {
           height: '390',
           width: '640',
           playerVars: {
@@ -198,9 +229,11 @@ main {
 
       function playIt() {
         playButton.classList.toggle("hidden")
-        let playerWrapper = document.querySelector("#playerWrapper")
+        let playerWrapper = document.querySelector(".playerWrapper")
         playerWrapper.classList.toggle("hidden")
-        player.loadVideoById("6WTdTwcmxyo")
+        let playerEl = document.querySelector("#player")
+        playerEl.classList.toggle("hidden")
+        player.loadVideoById("6WTdTwcmxyo", 6.9)
       }
 
       function onPlayerStateChange(event) {
