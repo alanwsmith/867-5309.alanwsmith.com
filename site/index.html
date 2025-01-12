@@ -186,7 +186,7 @@ main {
           bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
         }
         if (nextFrameNumber <= maxFrameNumber) {
-          if (nextFrameNumber % 2 === 1) {
+          if (nextFrameNumber % 2 === 0) {
             bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
             bgDivs[0].classList.add("off")
           } else {
