@@ -29,6 +29,64 @@ a, a:hover {
   text-decoration: none;
 }
 
+.bg-1 {
+  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  -webkit-transition: opacity 4.8s ease-out;
+  -moz-transition: opacity 4.8s ease-out;
+  -o-transition: opacity 4.8s ease-out;
+  transition: opacity 4.8s ease-out; 
+  opacity: 1;
+}
+
+.bg-1.off {
+  opacity: 0;
+}
+
+.bg-2 {
+  background: url(thumbs/thumbnail-2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 1;
+}
+
+.bg-blur {
+  backdrop-filter: blur(40px) brightness(30%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+.bg-preload {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 0;
+}
+
 body {
   background-color: black;
   color: #ddd;
@@ -51,8 +109,18 @@ button {
   outline: inherit;
 }
 
+footer {
+  font-size: 0.9rem;
+  margin-block: 1.2rem;
+  text-align: center;
+}
+
 .gray {
   color: #777;
+}
+
+.hidden {
+  display: none;
 }
 
 iframe {
@@ -67,87 +135,14 @@ main {
   justify-items: center;
 }
 
-.bg-preload {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  opacity: 0;
-}
-
-.bg-div-1.off {
-  opacity: 0;
-}
-
-.bg-div-2.off {
-  opacity: 0;
-}
-
-.bg-div-1 {
-  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  -webkit-transition: opacity 4.8s ease-out;
-  -moz-transition: opacity 4.8s ease-out;
-  -o-transition: opacity 4.8s ease-out;
-  transition: opacity 4.8s ease-out; 
-  opacity: 1;
-}
-
-.bg-div-2 {
-  background: url(thumbs/thumbnail-2.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  opacity: 1;
-}
-
-.bg-div-3 {
-  backdrop-filter: blur(40px) brightness(30%);
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-}
-
-.hidden {
-  display: none;
-}
-
-footer {
-  font-size: 0.9rem;
-  margin-block: 1.2rem;
-  text-align: center;
-}
-
-
 </style>
   </head>
   <body>
     <main> 
       <div class="bg-preload"></div>
-      <div class="bg-div-2"></div>
-      <div class="bg-div-1"></div>
-      <div class="bg-div-3"></div>
+      <div class="bg-2"></div>
+      <div class="bg-1"></div>
+      <div class="bg-blur"></div>
       <button class="startButton">Call: 867-5309</button>
       <div id="playerWrapper" class="hidden"></div>
     </main>
@@ -158,10 +153,8 @@ footer {
       </div>
       <div>
         <a href="/about/">about</a> ~
-        <a href="https://www.alanwsmith.com">alanwsmith.com</a> ~
-        <a href="https://links.alanwsmith.com">other sites</a> ~
-        <a href="https://bsky.app/profile/alanwsmith.com">bluesky</a> ~
-        <a href="https://hachyderm.io/@TheIdOfAlan">mastodon</a>
+        <a href="https://github.com/alanwsmith/867-5309.alanwsmith.com">source</a> ~
+        <a href="https://links.alanwsmith.com">other sites</a>
       </div>
     </footer>
 
@@ -175,8 +168,8 @@ footer {
       let thumbnailCount = 1
       let theInterval
       const bgDivs = [
-        document.querySelector(".bg-div-1"),
-        document.querySelector(".bg-div-2"),
+        document.querySelector(".bg-1"),
+        document.querySelector(".bg-2"),
         document.querySelector(".bg-preload")
       ]
 
@@ -188,7 +181,6 @@ footer {
 
       function switchImage() {
         let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 2 
-        console.log(nextFrameNumber)
         let preloadFrameNumber = nextFrameNumber + 1
         if (nextFrameNumber < maxFrameNumber) {
           bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
@@ -223,7 +215,7 @@ footer {
         playButton.classList.toggle("hidden")
         let playerWrapper = document.querySelector("#playerWrapper")
         playerWrapper.classList.toggle("hidden")
-        player.loadVideoById("6WTdTwcmxyo", 2)
+        player.loadVideoById("6WTdTwcmxyo")
       }
 
     </script>
