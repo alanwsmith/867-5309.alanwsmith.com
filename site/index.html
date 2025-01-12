@@ -18,8 +18,7 @@
     <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="A page for the classic number: 867-5309" />
-  <style>
-
+    <style>
 * {
   margin: 0;
 }
@@ -81,9 +80,6 @@ a, a:hover {
   position: absolute;
   left: 0;
   top: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
   opacity: 0;
 }
 
@@ -134,9 +130,9 @@ main {
   display: grid;
   justify-items: center;
 }
-
-</style>
+    </style>
   </head>
+ 
   <body>
     <main> 
       <div class="bg-preload"></div>
@@ -164,42 +160,30 @@ main {
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       var player;
-      let maxFrameNumber = 46 
-      let thumbnailCount = 1
       let theInterval
+      let currentDiv = 0
       const bgDivs = [
         document.querySelector(".bg-1"),
         document.querySelector(".bg-2"),
         document.querySelector(".bg-preload")
       ]
 
-      function init() {
-        theInterval = setInterval(() => {
-          switchImage()
-        }, 5000) 
-      }
-
       function switchImage() {
-        let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 2 
+        let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 1 
         let preloadFrameNumber = nextFrameNumber + 1
-        if (nextFrameNumber < maxFrameNumber) {
-          bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
-        }
-        if (nextFrameNumber <= maxFrameNumber) {
-          if (nextFrameNumber % 2 === 0) {
-            bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
-            bgDivs[0].classList.add("off")
-          } else {
-            bgDivs[0].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
-            bgDivs[0].classList.remove("off")
-          }
+        bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
+        if (currentDiv % 2 === 0) {
+          bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
+          bgDivs[0].classList.add("off")
         } else {
-          theInterval = null
+          bgDivs[0].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
+          bgDivs[0].classList.remove("off")
         }
+        currentDiv += 1
       }
 
       let playButton = document.querySelector(".startButton")
-      playButton.addEventListener("click", () => { init(); playIt(); })
+      playButton.addEventListener("click", playIt)
 
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('playerWrapper', {
@@ -208,6 +192,9 @@ main {
           playerVars: {
             'playsinline': 1
           },
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
         });
       }
 
@@ -218,6 +205,17 @@ main {
         player.loadVideoById("6WTdTwcmxyo")
       }
 
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+          switchImage()
+          theInterval = setInterval(() => {
+            switchImage()
+          }, 5000) 
+        } else {
+          // TODO: Figure out why this isn't stopping the interval
+          theInterval = null
+        }
+      }
     </script>
 
   </body>
