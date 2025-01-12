@@ -1,14 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>867-5309 - The Classic Number</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="867-5309 - The classic number" />
+    <meta property="og:description" content="from alan w. smith" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://867-5309.alanwsmith.com/" />
+    <meta property="og:image" content="https://867-5309.alanwsmith.com/images/og-image.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="shortcut icon" href="/favicons/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="A page for the classic number: 867-5309" />
 <style>
 
 * {
   margin: 0;
 }
 
+a, a:hover {
+  color: #941616;
+  text-decoration: none;
+}
+
 body {
   background-color: black;
+  color: #ddd;
+}
+
+main {
+  position: relative;
+}
+
+.bg-preload {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 0;
+}
+
+
+.bg-div-1.off {
+  opacity: 0;
+}
+
+.bg-div-2.off {
+  opacity: 0;
+}
+
+.bg-div-1 {
+  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  -webkit-transition: opacity 9.4s ease-out;
+  -moz-transition: opacity 9.4s ease-out;
+  -o-transition: opacity 9.4s ease-out;
+  transition: opacity 9.4s ease-out; 
+  opacity: 1;
+}
+
+.bg-div-2 {
+  background: url(thumbs/thumbnail-11.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  -webkit-transition: opacity 1s ease-out;
+  -moz-transition: opacity 1s ease-out;
+  -o-transition: opacity 1s ease-out;
+  transition: opacity 1s ease-out; 
+  z-index: -1;
+  opacity: 1;
+}
+
+.bg-div-3 {
+  backdrop-filter: blur(40px) brightness(50%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+/*
+.bg-div-1 {
+  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: green;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  -webkit-transition: background 2s ease-out;
+  -moz-transition: background 2s ease-out;
+  -o-transition: background 2s ease-out;
+  transition: background 2s ease-out;
+  z-index: -1;
+}
+*/
+
+/*
+        .bg-div.alfa {
+          background: url(thumbs/thumbnail-11.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+
+*/
+
+/*
+
+body {
+  backdrop-filter: blur(40px) brightness(50%);
   color: #ddd;
   min-height: 100vh;
   min-height: 100dvh;
@@ -18,23 +150,74 @@ body {
   font-weight: normal;
 }
 
+body {
+  background: url(thumbs/thumbnail-1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  -webkit-transition: background 2s ease-out;
+  -moz-transition: background-image 2s ease-out;
+  -o-transition: background 2s ease-out;
+  transition: background 2s ease-out;
+}
+
+body.change3 {
+  background: url(thumbs/thumbnail-11.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.xchanged {
+  background: url(thumbs/thumbnail-20.jpg) no-repeat center center fixed; 
+  background-size: cover;
+}
+
+
+footer {
+  font-size: 0.8rem;
+  margin-block: 1.2rem;
+  text-align: center;
+}
+
 iframe {
+  border: 1px solid #333;
   border-radius: 0.5rem;
 }
+
+main {
+  align-items: center;
+  display: grid;
+  justify-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  font-size: 3rem;
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+}
+
+*/
 
 </style>
   </head>
   <body>
+
+    <!--
     <main>
-    <iframe 
-      width="560" 
-      height="315" 
-      src="https://www.youtube.com/embed/6WTdTwcmxyo?si=vQQ1u-mPq8808V9f" 
-      title="867-5309 by Tommy Tutone" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-      referrerpolicy="strict-origin-when-cross-origin" 
-      allowfullscreen></iframe>
+      <button class="startButton">Call: 867-5309</button>
+      <div id="playerWrapper" class="hidden"></div>
     </main>
     <footer>
       <div>
@@ -47,6 +230,107 @@ iframe {
         <a href="https://hachyderm.io/@TheIdOfAlan">mastodon</a>
       </div>
     </footer>
+
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+
+      let playButton = document.querySelector(".startButton")
+      playButton.addEventListener("click", playIt)
+
+      function playIt() {
+        playButton.classList.toggle("hidden")
+        let playerWrapper = document.querySelector("#playerWrapper")
+        playerWrapper.classList.toggle("hidden")
+        player.loadVideoById("6WTdTwcmxyo")
+      }
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('playerWrapper', {
+          height: '390',
+          width: '640',
+          playerVars: {
+            'playsinline': 1
+          },
+        });
+      }
+    </script>
+
+    <script type="module">
+      const style1 = document.createElement("style")
+      style1.textContent = `
+        .change1 {
+          background: url(thumbs/thumbnail-11.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+        .change2 {
+          background: url(thumbs/thumbnail-20.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
+`
+      // document.head.appendChild(style1)
+
+      // document.body.style.backgroundImage = "url(thumbs/thumbnail-1.jpg)"
+      // document.body.classList.add("change3")
+    </script>
+-->
+
+    <main> 
+      <div class="bg-preload"></div>
+      <div class="bg-div-2"></div>
+      <div class="bg-div-1"></div>
+      <div class="bg-div-3"></div>
+      <button class="startButton">Call: 867-5309</button>
+    </main>
+
+    <script type="module">
+    let frame = 1
+    let theInterval
+    const bgDivs = [
+      document.querySelector(".bg-div-1"),
+      document.querySelector(".bg-div-2"),
+      document.querySelector(".bg-preload")
+    ]
+
+    function init() {
+      switchImage()
+      theInterval = setInterval(() => {
+        console.log(frame)
+        switchImage()
+      }, 10000) 
+    }
+
+    function switchImage() {
+      frame += 1
+      if (frame < 115) {
+        bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${frame + 1}.jpg)`
+      }
+      if (frame < 116) {
+        if (frame % 2 === 0) {
+          bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${frame}.jpg)`
+          bgDivs[0].classList.add("off")
+        } else {
+          bgDivs[0].style.backgroundImage = `url(thumbs/thumbnail-${frame}.jpg)`
+          bgDivs[0].classList.remove("off")
+        }
+      } else {
+        theInterval = null
+      }
+    }
+
+    let playButton = document.querySelector(".startButton")
+    playButton.addEventListener("click", init)
+    </script>
+
   </body>
 </html>
 
