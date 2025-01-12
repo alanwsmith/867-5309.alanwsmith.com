@@ -161,7 +161,6 @@ main {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       var player;
       let theInterval
-      let currentDiv = 0
       const bgDivs = [
         document.querySelector(".bg-1"),
         document.querySelector(".bg-2"),
@@ -172,14 +171,13 @@ main {
         let nextFrameNumber = Math.floor(player.getCurrentTime() / 5) + 1 
         let preloadFrameNumber = nextFrameNumber + 1
         bgDivs[2].style.backgroundImage = `url(thumbs/thumbnail-${preloadFrameNumber}.jpg)`
-        if (currentDiv % 2 === 0) {
+        if (nextFrameNumber % 2 === 1) {
           bgDivs[1].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
           bgDivs[0].classList.add("off")
         } else {
           bgDivs[0].style.backgroundImage = `url(thumbs/thumbnail-${nextFrameNumber}.jpg)`
           bgDivs[0].classList.remove("off")
         }
-        currentDiv += 1
       }
 
       let playButton = document.querySelector(".startButton")
